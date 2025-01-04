@@ -1,0 +1,69 @@
+---
+title: "ANOVA for 2^(5-2) design"
+author: "Sergey"
+date: "2024-10-14"
+output:
+  word_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Прецизионность (IP) и повторяемость (repeatability) для дизайна 2^(5-2)
+## Подгружаю нужные мне пакеты
+```{r packages}
+library(FrF2)  # Для создания дробных факторных планов
+library(dplyr)  # Для обработки данных
+library(tidyr)  # Для обработки данных
+library(broom)  # Для удобного представления результатов
+library(lme4)   # Для моделирования смешанных эффектов
+library(readxl)   # Для работы с Excel
+```
+
+## Функция для чтения данных и проведения анализа
+```{r read and modify}
+analyze_data <- function(data) {
+  # Преобразование данных для ANOVA
+  data_long <- data %>%
+    mutate(run = row_number()) %>% 
+    pivot_longer(cols = starts_with("rep"), names_to = "replication", values_to = "response") 
+
+  # Проведение ANOVA
+  model <- aov(response ~ (A + B + C + D + E) * replication, data = data_long)
+  summary(model)
+
+  #Определение компонентов дисперсии
+  mixed_model <- lmer(response ~ (1 | A) + (1 | B) + (1 | C) + (1 | D) + (1 | E)+ (1 | replication), data = data_long)
+  vc <- VarCorr(mixed_model)
+  var_factors <- sapply(vc, as.numeric)
+  var_error <- attr(vc, "sc")^2
+
+  # Вывод результатов
+  cat("var(factors):", var_factors, "\n")
+  cat("var(error):", var_error, "\n")
+  print("Variance components table")
+  print(vc)
+}
+```
+
+## Чтение таблиц
+```{r}
+data50 <- read_excel("data/raw/experiment_data50.xlsx")
+data100 <- read_excel("data/raw/experiment_data100.xlsx")
+data200 <- read_excel("data/raw/experiment_data200.xlsx")
+```
+
+
+## Вызов функции и анализ
+```{r}
+print("50 level")
+result50 <- analyze_data(data50)
+print("100 level")
+result100 <- analyze_data(data100)
+print("200 level")
+result200 <- analyze_data(data200)
+```
+

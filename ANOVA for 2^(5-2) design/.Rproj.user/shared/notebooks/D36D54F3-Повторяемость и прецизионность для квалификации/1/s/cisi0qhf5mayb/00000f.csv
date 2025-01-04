@@ -1,0 +1,69 @@
+"0","library(FrF2)  # Для создания дробных факторных планов"
+"2","Загрузка требуемого пакета: DoE.base
+"
+"2","Загрузка требуемого пакета: grid
+"
+"2","Загрузка требуемого пакета: conf.design
+"
+"2","Registered S3 method overwritten by 'DoE.base':
+  method           from       
+  factorize.factor conf.design
+"
+"2","
+Присоединяю пакет: ‘DoE.base’
+
+"
+"2","Следующие объекты скрыты от ‘package:stats’:
+
+    aov, lm
+
+"
+"2","Следующий объект скрыт от ‘package:graphics’:
+
+    plot.design
+
+"
+"2","Следующий объект скрыт от ‘package:base’:
+
+    lengths
+
+"
+"0","library(dplyr)  # Для обработки данных"
+"2","
+Присоединяю пакет: ‘dplyr’
+
+"
+"2","Следующие объекты скрыты от ‘package:stats’:
+
+    filter, lag
+
+"
+"2","Следующие объекты скрыты от ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+"
+"0","library(tidyr)  # Для обработки данных"
+"0","library(broom)  # Для удобного представления результатов"
+"0","library(lme4)   # Для моделирования смешанных эффектов"
+"2","Загрузка требуемого пакета: Matrix
+"
+"2","
+Присоединяю пакет: ‘Matrix’
+
+"
+"2","Следующие объекты скрыты от ‘package:tidyr’:
+
+    expand, pack, unpack
+
+"
+"2","
+Присоединяю пакет: ‘lme4’
+
+"
+"2","Следующий объект скрыт от ‘package:conf.design’:
+
+    factorize
+
+"
+"0","library(readxl)   # Для работы с Excel"

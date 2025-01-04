@@ -1,0 +1,4 @@
+Acceptance criterion:
+%GCV = 18 %
+RB = 20 %
+Range: 0.5 - 1.5
